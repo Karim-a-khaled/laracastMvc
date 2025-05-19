@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class JobController extends Controller
 {
@@ -24,10 +23,9 @@ class JobController extends Controller
         //
     }
 
-    public function show(string $id)
+    public function show(int $id)
     {
-        $jobs = Job::all();
-        $job = Arr::first($jobs, fn($job) => $job['id'] == $id);
+        $job = Job::find($id);
 
         return view('job', ['job' => $job]);
     }
