@@ -11,12 +11,12 @@ class JobController extends Controller
     public function index(): View
     {
         $jobs = Job::with('employer')->simplePaginate(6);
-        return view('index', compact('jobs'));
+        return view('jobs.index', compact('jobs'));
     }
 
-    public function create()
+    public function create(): View
     {
-        //
+        return view('jobs.create');
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class JobController extends Controller
     public function show(int $id): View
     {
         $job = Job::with(['employer'])->find($id);
-        return view('show', ['job' => $job]);
+        return view('jobs.show', ['job' => $job]);
     }
 
     public function edit(string $id)
