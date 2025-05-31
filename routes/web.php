@@ -14,9 +14,10 @@ Route::get('/jobs', [JobController::class, 'index']);
 Route::post('/jobs', function () {
     // validation...
 
-    Job::create([
+    Job::query()->create([
         'title' => request('title'),
         'salary' => request('salary'),
+        'description' => request('description'),
         'employer_id' => 1
     ]);
 
