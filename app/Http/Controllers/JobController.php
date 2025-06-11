@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateJobRequest;
 use App\Models\Job;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -19,9 +21,16 @@ class JobController extends Controller
         return view('jobs.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateJobRequest $request): RedirectResponse
     {
-        //
+        Job::query()->create([
+            'title' => $request->title,
+            'salary' => $request->salary,
+            'description' => $request->description,
+            'employer_id' => 1,
+        ]);
+
+        return redirect('/jobs');
     }
 
     public function show(int $id): View

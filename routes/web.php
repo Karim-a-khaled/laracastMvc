@@ -10,19 +10,6 @@ Route::view('/contact', 'contact');
 
 Route::get('/jobs/create', [JobController::class, 'create']);
 Route::get('/jobs', [JobController::class, 'index']);
-
-Route::post('/jobs', function () {
-    // validation...
-
-    Job::query()->create([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'description' => request('description'),
-        'employer_id' => 1
-    ]);
-
-    return redirect('/jobs');
-});
-
+Route::post('/jobs', [JobController::class, 'store']);
 Route::get('/jobs/{id}', [JobController::class, 'show']);
 
